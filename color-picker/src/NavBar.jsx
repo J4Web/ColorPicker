@@ -23,6 +23,7 @@ class NavBar extends Component {
     this.setState((curState) => ({
       open: true,
     }));
+    setTimeout(() => this.setState({ open: false }), 2200);
 
     this.props.formatChange(e.target.value);
   }
@@ -65,7 +66,7 @@ class NavBar extends Component {
               Format Changed to {this.state.format.toUpperCase()}
             </p>
           }
-          onClick={this.handleClick}
+          //   onClose={() => this.setState({ open: true })}
           ContentProps={{
             "aria-describedby": "message-id",
           }}
