@@ -5,17 +5,29 @@ import "rc-slider/assets/index.css";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import "./Navbar.css";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       format: "hex",
+      open: false,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   handleChange(e) {
     this.setState({ format: e.target.value });
+    this.setState((curState) => ({
+      open: true,
+    }));
+
     this.props.formatChange(e.target.value);
+  }
+  handleClick() {
+    this.setState({ open: false });
   }
   render() {
     const { level, changeLevel } = this.props;
@@ -44,6 +56,25 @@ class NavBar extends Component {
             <MenuItem value="rgba">rgba(255,255,255,1.0)</MenuItem>
           </Select>
         </div>
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          autoHideDuration={1000}
+          open={this.state.open}
+          message={
+            <p id="message-id">
+              Format Changed to {this.state.format.toUpperCase()}
+            </p>
+          }
+          onClick={this.handleClick}
+          ContentProps={{
+            "aria-describedby": "message-id",
+          }}
+          action={[
+            <IconButton onClick={this.handleClick} color="inherit" key="Close">
+              <CloseIcon />
+            </IconButton>,
+          ]}
+        ></Snackbar>
       </header>
     );
   }
