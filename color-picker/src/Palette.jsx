@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import ColorBox from "./ColorBox";
+
 import "./Palette.css";
 class Palette extends Component {
   render() {
-    const boxes = this.props.colors.map((box) => {
+    const boxes = this.props.palette.colors[300].map((box) => {
+      console.warn(box);
       return <ColorBox bg={box} />;
     });
     return (
