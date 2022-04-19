@@ -33,10 +33,12 @@ class Palette extends Component {
 
     const { paletteName, emoji } = palettes;
     // console.warn(colors[0].id);
-    console.log(palettes);
-    const boxes = palettes.colors[level].map((box) => {
+    console.log(typeof palettes);
+    console.log(palettes.colors);
+
+    const boxes = palettes?.colors?.[level]?.map((box) => {
       // console.warn(box);
-      return <ColorBox key={box.color} bg={box} format={format} />;
+      return <ColorBox key={box[format]} bg={box} format={format} />;
     });
     return (
       <div className="Palette">
