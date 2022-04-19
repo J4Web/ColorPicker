@@ -6,8 +6,8 @@ import Combine from "./Combine";
 function App() {
   return (
     <Routes>
-      <Route path="/palette/:id" element={<Combine />} />
       <Route path="/" element={<PaletteList palette={SeedColors} />}></Route>
+      <Route path="/palette/:id" element={<Combine />} />
     </Routes>
   );
 }

@@ -1,4 +1,4 @@
-import { bgcolor } from "@mui/system";
+import { bgcolor, palette } from "@mui/system";
 import React, { Component } from "react";
 import ColorBox from "./ColorBox";
 import NavBar from "./NavBar";
@@ -21,17 +21,22 @@ class Palette extends Component {
   }
   render() {
     const { level, format } = this.state;
-    const { paletteName, emoji } = this.props.palette;
+    // const { paletteName, emoji, colors } = palettes.at(
+    //   level / 100 || palettes[0]
+    // );
     // console.log(paletteName);
     // console.log(this.props);
     // console.warn(this.props.palette);
     // console.warn(this.props.palette.colors);
     // console.table(this.props.palette.colors[500]);
+    const palettes = this.props.palette;
+
+    const { paletteName, emoji } = palettes;
     // console.warn(colors[0].id);
-    console.table(this.props.palette.colors);
-    const boxes = this.props.palette.colors[this.state.level].map((box) => {
+    console.log(palettes);
+    const boxes = palettes.colors[level].map((box) => {
       // console.warn(box);
-      return <ColorBox bg={box} format={format} />;
+      return <ColorBox key={box.color} bg={box} format={format} />;
     });
     return (
       <div className="Palette">
