@@ -1,15 +1,13 @@
 import "./App.css";
-
+import PaletteList from "./Palette";
 import { Routes, Route } from "react-router-dom";
+import SeedColors from "./SeedColors";
 import Combine from "./Combine";
 function App() {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={<h1>Hellooo just testing this home page</h1>}
-      ></Route>
       <Route path="/palette/:id" element={<Combine />} />
+      <Route path="/" element={<PaletteList palette={SeedColors} />}></Route>
     </Routes>
   );
 }
