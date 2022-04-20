@@ -34,7 +34,7 @@ function MiniPalette(props) {
   const { classes } = props;
   //   console.error(props.palette);
   const { emoji, paletteName } = props;
-  console.log(classes);
+  //   console.log(classes);
   return (
     <div className={classes.root}>
       <div className={classes.colors}></div>
