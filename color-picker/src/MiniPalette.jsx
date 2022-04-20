@@ -7,13 +7,16 @@ const styles = {
     borderRadius: "5px",
     padding: "0.5rem",
     position: "relative",
-    overflow: "hidden",
+
     "&:hover": {
       cursor: "pointer",
     },
   },
   colors: {
-    backgroundColor: "grey",
+    backgroundColor: "#dae1e4",
+    width: "100%",
+    height: "160px",
+    overflow: "hidden",
   },
   title: {
     display: "flex",
@@ -28,16 +31,28 @@ const styles = {
   emoji: {
     backgroundColor: "yellow",
   },
+  miniColor: {
+    height: "25%",
+    width: "20%",
+    display: "inline-block",
+    margin: "0 auto",
+    position: "relative",
+    marginBottom: "-3.5px",
+  },
 };
 // so in short if you wanna target specific inside a class we do "& h3:{}"
 function MiniPalette(props) {
-  const { classes } = props;
-  //   console.error(props.palette);
-  const { emoji, paletteName } = props;
-  //   console.log(classes);
+  const { classes, emoji, paletteName, colors } = props;
+  const miniColorBoxes = colors.map((color) => (
+    <div
+      key={color.name}
+      className={classes.miniColor}
+      style={{ backgroundColor: color.color }}
+    ></div>
+  ));
   return (
     <div className={classes.root}>
-      <div className={classes.colors}></div>
+      <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
         {paletteName} <span className={classes.emoji}>{emoji}</span>
       </h5>
