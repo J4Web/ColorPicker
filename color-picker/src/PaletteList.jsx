@@ -13,7 +13,7 @@ export default class PaletteList extends Component {
         {palette.map((item) => {
           return (
             <p>
-              <Link to={`/palette/${item.id}`}>{item.paletteName}</Link>
+              <MiniPalette {...item} />
             </p>
           );
         })}
