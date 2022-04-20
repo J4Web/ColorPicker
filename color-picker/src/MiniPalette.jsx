@@ -8,15 +8,25 @@ const styles = {
   second: {
     backGroundColor: "#464743",
     color: "#900",
+    "& h2": {
+      backGroundColor: "teal",
+    },
   },
 };
+
+// so in short if you wanna target specific inside a class we do "& h3:{}"
 function MiniPalette(props) {
   const { classes } = props;
   console.log(classes);
   return (
     <div className={classes.main}>
       MiniPalette
-      <h3 className={classes.second}>Heyyy</h3>
+      <h2 className={classes.second}>Heyyy</h2>
+      <div className="second">
+        <h2 className={classes.second}>
+          here is the second h2 and by doing & it'll only be styled
+        </h2>
+      </div>
     </div>
   );
 }
