@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import MiniPalette from "./MiniPalette";
 
+const styles = {
+  root: {},
+};
 export default class PaletteList extends Component {
   render() {
     const { palette } = this.props;
