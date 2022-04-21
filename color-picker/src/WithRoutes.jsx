@@ -1,12 +1,13 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const WithRoutes = (Combine) => {
-  function EnhancedWithRoutes() {
+  function EnhancedWithRoutes(props) {
     const params = useParams();
-    return <Combine params={params} />;
+    const nav = useNavigate();
+    return <Combine params={params} nav={nav} {...props} />;
   }
   return EnhancedWithRoutes;
 };
 
-export default WithRoutes;
+export { WithRoutes };

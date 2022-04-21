@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Palette from "./Palette";
 import SeedColors from "./SeedColors";
 import { getPalette } from "./ColorHelpers";
-import WithRoutes from "./WithRoutes";
+import { WithRoutes } from "./WithRoutes";
 class Combine extends Component {
   findPalette = (id) => {
     // console.log(id);
