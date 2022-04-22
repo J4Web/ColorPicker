@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./ColorBox.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
-export default class ColorBox extends Component {
+import { WithRoutes } from "./WithRoutes";
+class ColorBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,10 +18,13 @@ export default class ColorBox extends Component {
   }
   render() {
     const { name } = this.props.bg;
+    const { currentId } = this.props;
+    const { id } = this.props.params;
     // console.log(this.props.bg);
 
     let format = this.props.format;
-    // console.warn(format);
+    console.log(id);
+    console.log(currentId);
     const color = this.props.bg[format];
     // console.log("you chose", color);
     const { copied } = this.state;
@@ -41,11 +45,16 @@ export default class ColorBox extends Component {
             </div>
             <button className="copy-button">Copy</button>
           </div>
-          <Link to="/" onClick={(e) => e.stopPropagation()}>
-            <spna className="see-more">More</spna>
+          <Link to={`${currentId}`} onClick={(e) => e.stopPropagation()}>
+            <span className="see-more">More</span>
           </Link>
         </div>
       </CopyToClipboard>
     );
   }
 }
+
+//Note to you could of already constructed the whole link in palette and then passed down to the
+//colorBox comp as a prop //also could of constructed the complete url but u didnt u did to="${currColor}" which is a new thing didn't know about that ?
+
+export default WithRoutes(ColorBox);

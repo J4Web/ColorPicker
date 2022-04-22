@@ -30,6 +30,7 @@ class Palette extends Component {
     // console.warn(this.props.palette.colors);
     // console.table(this.props.palette.colors[500]);
     const palettes = this.props.palette;
+    // console.log(palettes);
 
     const { paletteName, emoji } = palettes;
     // console.warn(colors[0].id);
@@ -38,7 +39,14 @@ class Palette extends Component {
 
     const boxes = palettes?.colors?.[level]?.map((box) => {
       // console.warn(box);
-      return <ColorBox key={box[format]} bg={box} format={format} />;
+      return (
+        <ColorBox
+          key={box[format]}
+          bg={box}
+          format={format}
+          currentId={box.id}
+        />
+      );
     });
     return (
       <div className="Palette">

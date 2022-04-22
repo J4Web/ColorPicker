@@ -3,6 +3,7 @@ import PaletteList from "./PaletteList";
 import { Routes, Route } from "react-router-dom";
 import SeedColors from "./SeedColors";
 import Combine from "./Combine";
+import SingleColorPalette from "./SingleColorPalette";
 function App() {
   return (
     <Routes>
@@ -14,7 +15,7 @@ function App() {
       <Route path="/palette/:id" element={<Combine />} />
       <Route
         path="/palette/:paletteId/:colorId"
-        element={<h1>Heyy this route is for individual component</h1>}
+        element={<SingleColorPalette />}
       />
     </Routes>
   );
