@@ -33,8 +33,8 @@ class Palette extends Component {
 
     const { paletteName, emoji } = palettes;
     // console.warn(colors[0].id);
-    console.log(typeof palettes);
-    console.log(palettes.colors);
+    // console.log(typeof palettes);
+    // console.log(palettes.colors);
 
     const boxes = palettes?.colors?.[level]?.map((box) => {
       // console.warn(box);

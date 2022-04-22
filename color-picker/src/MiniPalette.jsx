@@ -41,6 +41,7 @@ const styles = {
   },
 };
 // so in short if you wanna target specific inside a class we do "& h3:{}"
+
 function MiniPalette(props) {
   const { classes, emoji, paletteName, colors } = props;
   const miniColorBoxes = colors.map((color) => (
@@ -51,7 +52,7 @@ function MiniPalette(props) {
     ></div>
   ));
   return (
-    <div className={classes.root}>
+    <div className={classes.root} onClick={props.handlePath}>
       <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
         {paletteName} <span className={classes.emoji}>{emoji}</span>

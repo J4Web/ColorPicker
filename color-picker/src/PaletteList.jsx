@@ -39,21 +39,28 @@ class PaletteList extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick(id) {
-    this.props.nav.to(`/palette/${id}`);
+    const { nav } = this.props;
+    console.log(nav, id);
+    nav(`/palette/${id}`);
   }
   render() {
     const { classes } = this.props;
 
-    console.log(this.props);
+    // console.log(this.props);
     return (
-      <div className={`root`}>
-        <div className={`container`}>
-          <nav className={`nav`}>
+      <div className={classes.root}>
+        <div className={classes.container}>
+          <nav className={classes.nav}>
             <h1>React Colors</h1>
           </nav>
-          <div className={`palettes`}>
+          <div className={classes.palettes}>
             {this.props.palette?.map((item) => {
-              return <MiniPalette {...item} />;
+              return (
+                <MiniPalette
+                  {...item}
+                  handlePath={() => this.handleClick(item.id)}
+                />
+              );
             })}
           </div>
         </div>

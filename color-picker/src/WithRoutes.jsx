@@ -4,8 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 const WithRoutes = (Combine) => {
   function EnhancedWithRoutes(props) {
     const params = useParams();
-    const nav = useNavigate();
-    return <Combine params={params} nav={nav} {...props} />;
+    const navigate = useNavigate();
+    return <Combine params={params} nav={navigate} {...props} />;
   }
   return EnhancedWithRoutes;
 };
