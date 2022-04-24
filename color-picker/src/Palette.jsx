@@ -45,6 +45,7 @@ class Palette extends Component {
           bg={box}
           format={format}
           currentId={box.id}
+          showLink={true}
         />
       );
     });

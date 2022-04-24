@@ -18,7 +18,7 @@ class ColorBox extends Component {
   }
   render() {
     const { name } = this.props.bg;
-    const { currentId } = this.props;
+    const { currentId, showLink } = this.props;
     const { id } = this.props.params;
     // console.log(this.props.bg);
 
@@ -45,9 +45,12 @@ class ColorBox extends Component {
             </div>
             <button className="copy-button">Copy</button>
           </div>
-          <Link to={`${currentId}`} onClick={(e) => e.stopPropagation()}>
-            <span className="see-more">More</span>
-          </Link>
+          {showLink && (
+            <Link to={`${currentId}`} onClick={(e) => e.stopPropagation()}>
+              {" "}
+              <span className="see-more">More</span>
+            </Link>
+          )}
         </div>
       </CopyToClipboard>
     );
