@@ -23,8 +23,8 @@ class ColorBox extends Component {
     // console.log(this.props.bg);
 
     let format = this.props.format;
-    console.log(id);
-    console.log(currentId);
+    // console.log(id);
+    // console.log(currentId);
     const color = this.props.bg[format];
     // console.log("you chose", color);
     const { copied } = this.state;
