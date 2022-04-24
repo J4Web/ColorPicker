@@ -3,6 +3,7 @@ import { WithRoutes } from "./WithRoutes";
 import SeedColors from "./SeedColors";
 import { getPalette } from "./ColorHelpers";
 import ColorBox from "./ColorBox";
+import "./Palette.css";
 class SingleColorPalette extends Component {
   constructor(props) {
     super(props);
@@ -38,14 +39,15 @@ class SingleColorPalette extends Component {
   render() {
     const { colorId, paletteId } = this.props.params;
     const colorBox = this._shades.map((color) => (
-      <ColorBox key={color.id} bg={color[0]} />
+      <ColorBox key={color.id} bg={color[0]} format="hex" />
     ));
     // const palette = getPalette(this.findPalette(paletteId));
     // console.log(colorId);
     // console.log(palette);
     return (
-      <div>
-        <div>{colorBox}</div>
+      <div className="Palette">
+        <h1>Single Color Palette</h1>
+        <div className="Palette-colors">{colorBox}</div>
       </div>
     );
   }
