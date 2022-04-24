@@ -5,7 +5,7 @@ import { getPalette } from "./ColorHelpers";
 class SingleColorPalette extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this._state = this.gatherShades(this);
   }
   findPalette = (id) => {
     // console.log(id);
