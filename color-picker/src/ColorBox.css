@@ -92,7 +92,9 @@
   opacity: 0;
   color: #fff;
 }
-
+.SingleColorPalette .color-box {
+  height: 50%;
+}
 .copy-msg.show {
   opacity: 1;
   transform: scale(1);

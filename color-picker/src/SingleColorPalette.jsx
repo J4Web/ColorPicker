@@ -68,7 +68,7 @@ class SingleColorPalette extends Component {
     // console.log(colorId);
     // console.log(palette);
     return (
-      <div className="Palette">
+      <div className="SingleColorPalette Palette">
         <Navbar formatChange={this.formatChange} isShowingAllColors={false} />
         {/* <h1>Single Color Palette</h1> */}
         <div className="Palette-colors">{colorBox}</div>
