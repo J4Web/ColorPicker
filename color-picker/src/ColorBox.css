@@ -49,6 +49,12 @@
   text-transform: uppercase;
   font-size: 12px;
 }
+.light-text {
+  color: #fff;
+}
+.color-box .dark-text {
+  color: rgba(0, 0, 0, 0.5);
+}
 .see-more {
   position: absolute;
   right: 0;
