@@ -4,6 +4,9 @@ import SeedColors from "./SeedColors";
 import { getPalette } from "./ColorHelpers";
 import ColorBox from "./ColorBox";
 import "./Palette.css";
+import Navbar from "./NavBar";
+import PaletteFooter from "./PaletteFooter";
+// import "./FooterForSingleColor.css";
 class SingleColorPalette extends Component {
   constructor(props) {
     super(props);
@@ -13,9 +16,14 @@ class SingleColorPalette extends Component {
       getPalette(this.findPalette(paletteId)),
       this.props.params.colorId
     );
+    this.state = {
+      format: "hex",
+    };
+
     // console.log(this._shades);
     console.log(this.props.params.colorId);
     console.log(this._shades);
+    this.formatChange = this.formatChange.bind(this);
   }
   findPalette = (id) => {
     // console.log(id);
@@ -35,19 +43,36 @@ class SingleColorPalette extends Component {
     }
     return shades.splice(1);
   }
+  formatChange(val) {
+    this.setState({ format: val });
+  }
+  // findPalette = (id) => {
+  //   // console.log(id);
+  //   return SeedColors.find(function (palette) {
+  //     return palette.id === id;
+  //   });
+  // };
 
   render() {
+    const { format } = this.state;
     const { colorId, paletteId } = this.props.params;
+    const footerData = getPalette(this.findPalette(paletteId));
+    const { emoji, paletteName } = footerData;
+
+    console.warn(emoji);
+    console.warn(paletteName);
     const colorBox = this._shades.map((color) => (
-      <ColorBox key={color.id} bg={color[0]} format="hex" />
+      <ColorBox key={color.id} bg={color[0]} format={format} showLink={false} />
     ));
     // const palette = getPalette(this.findPalette(paletteId));
     // console.log(colorId);
     // console.log(palette);
     return (
       <div className="Palette">
-        <h1>Single Color Palette</h1>
+        <Navbar formatChange={this.formatChange} isShowingAllColors={false} />
+        {/* <h1>Single Color Palette</h1> */}
         <div className="Palette-colors">{colorBox}</div>
+        <PaletteFooter emoji={emoji} paletteName={paletteName} />
       </div>
     );
   }
