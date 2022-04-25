@@ -4,6 +4,7 @@ import SeedColors from "./SeedColors";
 import { getPalette } from "./ColorHelpers";
 import ColorBox from "./ColorBox";
 import "./Palette.css";
+import { Link } from "react-router-dom";
 import Navbar from "./NavBar";
 import PaletteFooter from "./PaletteFooter";
 // import "./FooterForSingleColor.css";
@@ -61,9 +62,14 @@ class SingleColorPalette extends Component {
 
     console.warn(emoji);
     console.warn(paletteName);
-    const colorBox = this._shades.map((color) => (
-      <ColorBox key={color.id} bg={color[0]} format={format} showLink={false} />
-    ));
+    const colorBox = this._shades.map((color) => {
+      const { name } = color[0];
+      // console.log("yooo color ", color);
+      // console.warn("yooo warninggg", name);
+      return (
+        <ColorBox key={name} bg={color[0]} format={format} showLink={false} />
+      );
+    });
     // const palette = getPalette(this.findPalette(paletteId));
     // console.log(colorId);
     // console.log(palette);
@@ -71,7 +77,15 @@ class SingleColorPalette extends Component {
       <div className="SingleColorPalette Palette">
         <Navbar formatChange={this.formatChange} isShowingAllColors={false} />
         {/* <h1>Single Color Palette</h1> */}
-        <div className="Palette-colors">{colorBox}</div>
+        <div className="Palette-colors">
+          {colorBox}
+          <div className="go-back color-box">
+            <Link to={`/palette/${paletteId}`} className="back-button" href="#">
+              GO BACK
+            </Link>
+          </div>
+        </div>
+
         <PaletteFooter emoji={emoji} paletteName={paletteName} />
       </div>
     );
