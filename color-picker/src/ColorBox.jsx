@@ -4,6 +4,17 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
 import { WithRoutes } from "./WithRoutes";
 import chroma from "chroma-js";
+import { withStyles } from "@material-ui/core/styles";
+const styles = {
+  copyText: {
+    color: (props) =>
+      chroma(props.bg.hex).luminance() >= 0.7 ? "#000" : "#fff",
+  },
+  colorName: {
+    color: (props) =>
+      chroma(props.bg.hex).luminance() <= 0.08 ? "#fff" : "#000",
+  },
+};
 class ColorBox extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +39,9 @@ class ColorBox extends Component {
     // console.log(id);
     // console.log(currentId);
     const color = this.props.bg[format];
-    const isDarkColor = chroma(color).luminance() <= 0.08;
+    // const isDarkColor =
+    const { classes } = this.props;
+    console.log(classes.copyText);
     const isLightColor = chroma(color).luminance() >= 0.7;
     // console.log(isDarkColor);
     const { copied } = this.state;
@@ -45,16 +58,14 @@ class ColorBox extends Component {
           </div>
           <div className="color-container">
             <div className="box-content">
-              <span className={isDarkColor && "light-text"}> {name}</span>
+              <span className={`${classes.copyText}`}> {name}</span>
             </div>
             <button className="copy-button">Copy</button>
           </div>
           {showLink && (
             <Link to={`${currentId}`} onClick={(e) => e.stopPropagation()}>
               {" "}
-              <span className={`see-more ${isLightColor && "dark-text"}`}>
-                More
-              </span>
+              <span className={`see-more ${classes.colorName}`}>More</span>
             </Link>
           )}
         </div>
@@ -66,4 +77,4 @@ class ColorBox extends Component {
 //Note to you could of already constructed the whole link in palette and then passed down to the
 //colorBox comp as a prop //also could of constructed the complete url but u didnt u did to="${currColor}" which is a new thing didn't know about that ?
 
-export default WithRoutes(ColorBox);
+export default WithRoutes(withStyles(styles)(ColorBox));
