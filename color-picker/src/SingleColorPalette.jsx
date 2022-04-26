@@ -67,7 +67,12 @@ class SingleColorPalette extends Component {
       // console.log("yooo color ", color);
       // console.warn("yooo warninggg", name);
       return (
-        <ColorBox key={name} bg={color[0]} format={format} showLink={false} />
+        <ColorBox
+          key={name}
+          bg={color[0]}
+          format={format}
+          showingFullPalette={false}
+        />
       );
     });
     // const palette = getPalette(this.findPalette(paletteId));
