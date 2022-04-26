@@ -4,14 +4,12 @@ import { Routes, Route } from "react-router-dom";
 import SeedColors from "./SeedColors";
 import Combine from "./Combine";
 import SingleColorPalette from "./SingleColorPalette";
+import NewPaletteForm from "./NewPaletteForm";
 function App() {
   return (
     <Routes>
-      <Route
-        exact
-        path="/"
-        element={<PaletteList palette={SeedColors} />}
-      ></Route>
+      <Route path="/palette/new" element={<NewPaletteForm />}></Route>
+      <Route path="/" element={<PaletteList palette={SeedColors} />}></Route>
       <Route path="/palette/:id" element={<Combine />} />
       <Route
         path="/palette/:paletteId/:colorId"
