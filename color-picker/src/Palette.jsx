@@ -2,7 +2,7 @@ import { bgcolor, palette } from "@mui/system";
 import React, { Component } from "react";
 import ColorBox from "./ColorBox";
 import NavBar from "./NavBar";
-import "./Palette.css";
+// import "./Palette.css";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles/Palette.js";
 class Palette extends Component {
