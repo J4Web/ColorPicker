@@ -4,28 +4,7 @@ import ColorBox from "./ColorBox";
 import NavBar from "./NavBar";
 import "./Palette.css";
 import { withStyles } from "@material-ui/core/styles";
-const styles = {
-  palette: {
-    height: "100vh",
-    overflow: "hidden",
-  },
-  paletteColors: {
-    height: "90%",
-  },
-  paletteFooter: {
-    background: "#fff",
-    /* height: 5vh; */
-    display: "flex",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    fontWeight: "bold",
-    marginBottom: "1.9em",
-  },
-  emoji: {
-    fontSize: "1.5rem",
-    margin: "0 1.1rem",
-  },
-};
+import styles from "./styles/Palette.js";
 class Palette extends Component {
   constructor(props) {
     super(props);
