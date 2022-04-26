@@ -7,6 +7,7 @@ import "./Palette.css";
 import { Link } from "react-router-dom";
 import Navbar from "./NavBar";
 import PaletteFooter from "./PaletteFooter";
+import "./SingleColorBox.css";
 // import "./FooterForSingleColor.css";
 class SingleColorPalette extends Component {
   constructor(props) {
