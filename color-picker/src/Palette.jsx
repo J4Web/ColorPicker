@@ -21,6 +21,10 @@ const styles = {
     fontWeight: "bold",
     marginBottom: "1.9em",
   },
+  emoji: {
+    fontSize: "1.5rem",
+    margin: "0 1.1rem",
+  },
 };
 class Palette extends Component {
   constructor(props) {
@@ -80,7 +84,7 @@ class Palette extends Component {
         <div className={classes.paletteColors}>{boxes}</div>
         <footer className={classes.paletteFooter}>
           {paletteName}
-          <span className="emoji">{emoji}</span>
+          <span className={classes.emoji}>{emoji}</span>
         </footer>
       </div>
     );
