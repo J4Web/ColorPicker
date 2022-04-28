@@ -15,9 +15,10 @@ class SingleColorPalette extends Component {
   constructor(props) {
     super(props);
     const { paletteId } = this.props.params;
+    const { palette } = this.props;
     // console.log(paletteId);
     this._shades = this.gatherShades(
-      getPalette(this.findPalette(paletteId)),
+      getPalette(this.findPalette(paletteId, palette)),
       this.props.params.colorId
     );
     this.state = {
@@ -29,9 +30,9 @@ class SingleColorPalette extends Component {
     console.log(this._shades);
     this.formatChange = this.formatChange.bind(this);
   }
-  findPalette = (id) => {
+  findPalette = (id, colorPalette) => {
     // console.log(id);
-    return SeedColors.find(function (palette) {
+    return colorPalette.find(function (palette) {
       return palette.id === id;
     });
   };
@@ -60,7 +61,8 @@ class SingleColorPalette extends Component {
   render() {
     const { format } = this.state;
     const { colorId, paletteId } = this.props.params;
-    const footerData = getPalette(this.findPalette(paletteId));
+    const { palette } = this.props;
+    const footerData = getPalette(this.findPalette(paletteId, palette));
     const { emoji, paletteName } = footerData;
     const { classes } = this.props;
     console.warn(emoji);
