@@ -15,6 +15,7 @@ import Button from "@mui/material/Button";
 import DraggableColorBox from "./DraggableColorBox";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { useState, useEffect } from "react";
+import { WithRoutes } from "./WithRoutes";
 const drawerWidth = 400;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -63,7 +64,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-function NewPaletteForm() {
+function NewPaletteForm(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [currColor, setColor] = React.useState("teal");
@@ -90,16 +91,26 @@ function NewPaletteForm() {
     };
     moreColor([...color, idkColor]);
   };
-  useEffect(() => {
-    ValidatorForm.addValidationRule("isColorUnique", (value) => {
-      color.every(({ name }) => name.toLowerCase() !== value.toLowerCase());
-    });
-  }, []);
+  // useEffect(() => {
+  //   ValidatorForm.addValidationRule("isColorUnique", (value) => {
+  //     color.every(({ name }) => name.toLowerCase() !== value.toLowerCase());
+  //   });
+  // }, []);
+  const handleSubmit = (palette) => {
+    let newName = "New Test Palette";
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, "-"),
+      colors: color,
+    };
+    props.savePalette(newPalette);
+    props.nav("/");
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar color="default" position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -113,6 +124,9 @@ function NewPaletteForm() {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
+            Save Palette
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -178,4 +192,4 @@ function NewPaletteForm() {
   );
 }
 
-export default NewPaletteForm;
+export default WithRoutes(NewPaletteForm);

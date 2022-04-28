@@ -5,11 +5,21 @@ import SeedColors from "./SeedColors";
 import Combine from "./Combine";
 import SingleColorPalette from "./SingleColorPalette";
 import NewPaletteForm from "./NewPaletteForm";
+import { useState, useEffect } from "react";
 function App() {
+  const [palette, setPalette] = useState(SeedColors);
+  const savePalette = (newPalette) => {
+    console.log(newPalette);
+    setPalette([...palette, newPalette]);
+  };
+
   return (
     <Routes>
-      <Route path="/palette/new" element={<NewPaletteForm />}></Route>
-      <Route path="/" element={<PaletteList palette={SeedColors} />}></Route>
+      <Route
+        path="/palette/new"
+        element={<NewPaletteForm savePalette={savePalette} />}
+      ></Route>
+      <Route path="/" element={<PaletteList palette={palette} />}></Route>
       <Route path="/palette/:id" element={<Combine />} />
       <Route
         path="/palette/:paletteId/:colorId"
