@@ -17,6 +17,7 @@ import { useState, useEffect } from "react";
 import { WithRoutes } from "./WithRoutes";
 import * as yup from "yup";
 import { string } from "yup";
+import { useFormik } from "formik";
 // import colorSchema from "./Validations/validator";
 const drawerWidth = 400;
 
@@ -70,27 +71,60 @@ function NewPaletteForm(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [currColor, setColor] = React.useState("teal");
-  const [color, moreColor] = React.useState([]);
-  const [newName, setNewName] = React.useState("");
-
-  const colorSchema = yup.object({
-    color: string()
-      .required("Color Name is required")
-      .test(
-        "Name must be unique",
-        (val) => `${val.path} is not unique`
-        // (val) => console.log(val)
-        // (val) =>
-        //   color.every((el) => el.toLowerCase() !== val.color?.toLowerCase())
-      ),
+  const [color, setmoreColor] = React.useState([]);
+  const formik = useFormik({
+    initialValues: {
+      newName: "",
+    },
+    validationSchema: yup.object({
+      newName: yup
+        .string()
+        .required("Required")
+        .test("is unique", "Value must be unique", function validateColor(val) {
+          try {
+            const isValid = color.every(
+              (p) => p.name.toLowerCase() !== val.toLowerCase()
+            );
+            // console.log("promiseeee", isValid);
+            // console.log("val", val);
+            // console.log("moree colorr", setmoreColor);
+            return isValid;
+          } catch (err) {
+            console.log(err);
+          }
+        }),
+    }),
+    onSubmit: (values) => {
+      console.error(values);
+      // evt.preventDefault();
+      const idkColor = {
+        color: currColor,
+        name: values.newName,
+      };
+      console.log("obj colorr", idkColor);
+      setmoreColor([...color, idkColor]);
+    },
   });
+  console.warn(formik.errors);
+
+  // const colorSchema = yup.object({
+  //   color: string()
+  //     .required("Color Name is required")
+  //     .test(
+  //       "Name must be unique",
+  //       (val) => `${val.path} is not unique`,
+  //       (val) => console.log(val),
+  //       (val) =>
+  //         color.every((el) => el.toLowerCase() !== val.color?.toLowerCase())
+  //     ),
+  // });
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  const handleChange = (evt) => {
-    setNewName(evt.target.value);
-  };
+  // const handleChange = (evt) => {
+  //   setNewName(evt.target.value);
+  // };
 
   const handleDrawerClose = () => {
     setOpen(false);
@@ -98,24 +132,24 @@ function NewPaletteForm(props) {
   const updateColor = (newColor) => {
     setColor(newColor.hex);
   };
-  const newColor = async (evt, newColor) => {
-    evt.preventDefault();
-    const idkColor = {
-      color: currColor,
-      name: newName,
-    };
-    // console.log(idkColor);
-    try {
-      const isValid = await colorSchema.validate(idkColor, {
-        abortEarly: false,
-      });
-      console.log(isValid);
-      moreColor([...color, idkColor]);
-    } catch (err) {
-      const result = {};
-      console.log(err);
-    }
-  };
+  // const newColor = async (evt, newColor) => {
+  //   evt.preventDefault();
+  //   const idkColor = {
+  //     color: currColor,
+  //     name: newName,
+  //   };
+  //   // console.log(idkColor);
+  //   try {
+  //     const isValid = await colorSchema.validate(idkColor, {
+  //       abortEarly: false,
+  //     });
+  //     console.log(isValid);
+  //     moreColor([...color, idkColor]);
+  //   } catch (err) {
+  //     const result = {};
+  //     console.log(err);
+  //   }
+  // };
   // useEffect(() => {
   //   ValidatorForm.addValidationRule("isColorUnique", (value) => {
   //     color.every(({ name }) => name.toLowerCase() !== value.toLowerCase());
@@ -131,7 +165,7 @@ function NewPaletteForm(props) {
     props.savePalette(newPalette);
     props.nav("/");
   };
-
+  // console.log(formik.values);
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -184,13 +218,15 @@ function NewPaletteForm(props) {
         </div>
 
         <ChromePicker color={currColor} onChangeComplete={updateColor} />
-        <form onSubmit={newColor}>
+        <form onSubmit={formik.handleSubmit}>
           <input
             type="text"
-            name="color"
-            value={newName}
-            onChange={handleChange}
+            id="newName"
+            name="newName"
+            value={formik.values.newName}
+            onChange={formik.handleChange}
           />
+          {formik.errors.newName ? <span>{formik.errors.newName}</span> : null}
           <Button
             variant="contained"
             color="primary"
