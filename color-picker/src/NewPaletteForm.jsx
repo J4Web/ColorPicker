@@ -153,6 +153,7 @@ function NewPaletteForm(props) {
   });
   console.warn(formik.errors);
   console.warn(formik1.errors);
+  console.log(color);
 
   // const colorSchema = yup.object({
   //   color: string()
@@ -178,6 +179,10 @@ function NewPaletteForm(props) {
   };
   const updateColor = (newColor) => {
     setColor(newColor.hex);
+  };
+  const handleDelete = (colorHex) => {
+    setmoreColor(color.filter((p) => p.color !== colorHex));
+    console.log(color);
   };
   // const newColor = async (evt, newColor) => {
   //   evt.preventDefault();
@@ -304,7 +309,14 @@ function NewPaletteForm(props) {
       <Main open={open}>
         <DrawerHeader />
         {color.map((c) => {
-          return <DraggableColorBox color={c.color} name={c.name} />;
+          return (
+            <DraggableColorBox
+              key={c.color}
+              color={c.color}
+              name={c.name}
+              handleClick={() => handleDelete(c.color)}
+            />
+          );
         })}
       </Main>
     </Box>
