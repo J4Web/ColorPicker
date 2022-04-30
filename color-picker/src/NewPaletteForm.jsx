@@ -72,27 +72,34 @@ function NewPaletteForm(props) {
   const [open, setOpen] = React.useState(false);
   const [currColor, setColor] = React.useState("teal");
   const [color, setmoreColor] = React.useState([]);
+  const [namePalette, setPaletteName] = React.useState("");
+  const { palette } = props;
+
   const formik = useFormik({
     initialValues: {
       newName: "",
     },
-    validationSchema: yup.object({
+    validationSchema: yup.object().shape({
       newName: yup
         .string()
         .required("Required")
-        .test("is unique", "Value must be unique", function validateColor(val) {
-          try {
-            const isValid = color.every(
-              (p) => p.name.toLowerCase() !== val.toLowerCase()
-            );
-            // console.log("promiseeee", isValid);
-            // console.log("val", val);
-            // console.log("moree colorr", setmoreColor);
-            return isValid;
-          } catch (err) {
-            console.log(err);
+        .test(
+          "isNameUnique",
+          "Name must be unique",
+          function validateColor(val) {
+            try {
+              const isValid = color.every(
+                (p) => p.name.toLowerCase() !== val.toLowerCase()
+              );
+              console.log("promiseeee", isValid);
+              console.log("val", val);
+              console.log("currColor", currColor);
+              return isValid;
+            } catch (err) {
+              console.log(err);
+            }
           }
-        }),
+        ),
     }),
     onSubmit: (values) => {
       console.error(values);
@@ -102,10 +109,46 @@ function NewPaletteForm(props) {
         name: values.newName,
       };
       console.log("obj colorr", idkColor);
+      console.log(color);
       setmoreColor([...color, idkColor]);
     },
   });
+  const formik1 = useFormik({
+    initialValues: {
+      namePalette: "",
+    },
+    validationSchema: yup.object({
+      namePalette: yup
+        .string()
+        .required("Required")
+        .test(
+          "isPaletteNameUnique",
+          "Palette Name Already made!",
+          function validateName(namePalette) {
+            console.log(namePalette);
+            console.log(palette);
+            let isValid = palette.every(
+              ({ paletteName }) => paletteName !== namePalette
+            );
+            return isValid;
+          }
+        ),
+    }),
+    onSubmit: (values) => {
+      let newName = values.namePalette;
+      console.log(newName);
+      setPaletteName(values.namePalette);
+      const newPalette = {
+        paletteName: newName,
+        id: newName.toLowerCase().replace(/ /g, "-"),
+        colors: color,
+      };
+      props.savePalette(newPalette);
+      props.nav("/");
+    },
+  });
   console.warn(formik.errors);
+  console.warn(formik1.errors);
 
   // const colorSchema = yup.object({
   //   color: string()
@@ -155,16 +198,16 @@ function NewPaletteForm(props) {
   //     color.every(({ name }) => name.toLowerCase() !== value.toLowerCase());
   //   });
   // }, []);
-  const handleSubmit = (palette) => {
-    let newName = "New Test Palette";
-    const newPalette = {
-      paletteName: newName,
-      id: newName.toLowerCase().replace(/ /g, "-"),
-      colors: color,
-    };
-    props.savePalette(newPalette);
-    props.nav("/");
-  };
+  // const handleSubmit = (palette) => {
+  //   let newName = "New Test Palette";
+  //   const newPalette = {
+  //     paletteName: newName,
+  //     id: newName.toLowerCase().replace(/ /g, "-"),
+  //     colors: color,
+  //   };
+  //   props.savePalette(newPalette);
+  //   props.nav("/");
+  // };
   // console.log(formik.values);
   return (
     <Box sx={{ display: "flex" }}>
@@ -183,9 +226,23 @@ function NewPaletteForm(props) {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Save Palette
-          </Button>
+          <form onSubmit={formik1.handleSubmit}>
+            <input
+              type="text"
+              id="namePalette"
+              name="namePalette"
+              value={formik1.values.namePalette}
+              onChange={formik1.handleChange}
+            />
+            {formik1.errors.namePalette ? (
+              <span className={{ color: "red" }}>
+                {formik1.errors.namePalette}
+              </span>
+            ) : null}
+            <Button type="submit" variant="contained" color="primary">
+              Save Palette
+            </Button>
+          </form>
         </Toolbar>
       </AppBar>
       <Drawer
