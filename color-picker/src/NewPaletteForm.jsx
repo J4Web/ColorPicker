@@ -89,7 +89,9 @@ function NewPaletteForm(props) {
           function validateColor(val) {
             try {
               const isValid = color.every(
-                (p) => p.name.toLowerCase() !== val.toLowerCase()
+                (p) =>
+                  p.name.toLowerCase() !== val.toLowerCase() &&
+                  color.length !== 0
               );
               console.log("promiseeee", isValid);
               console.log("val", val);
@@ -143,8 +145,10 @@ function NewPaletteForm(props) {
         id: newName.toLowerCase().replace(/ /g, "-"),
         colors: color,
       };
-      props.savePalette(newPalette);
-      props.nav("/");
+      if (newPalette.colors.length !== 0) {
+        props.savePalette(newPalette);
+        props.nav("/");
+      }
     },
   });
   console.warn(formik.errors);

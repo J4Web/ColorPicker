@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 function App() {
   const [palette, setPalette] = useState(SeedColors);
   const savePalette = (newPalette) => {
-    console.log(newPalette);
+    // console.log(newPalette);
     setPalette([...palette, newPalette]);
   };
 
