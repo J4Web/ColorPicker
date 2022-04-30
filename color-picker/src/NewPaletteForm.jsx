@@ -12,13 +12,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { ChromePicker } from "react-color";
 import Button from "@mui/material/Button";
-import DraggableColorBox from "./DraggableColorBox";
-import { useState, useEffect } from "react";
+
 import { WithRoutes } from "./WithRoutes";
 import * as yup from "yup";
-import { string } from "yup";
 import { useFormik } from "formik";
-// import colorSchema from "./Validations/validator";
+import DraggableColorList from "./DraggableColorList";
+import { arrayMove } from "react-sortable-hoc";
 const drawerWidth = 400;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -184,6 +183,9 @@ function NewPaletteForm(props) {
     setmoreColor(color.filter((p) => p.color !== colorHex));
     console.log(color);
   };
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setmoreColor(arrayMove(color, oldIndex, newIndex));
+  };
   // const newColor = async (evt, newColor) => {
   //   evt.preventDefault();
   //   const idkColor = {
@@ -308,16 +310,12 @@ function NewPaletteForm(props) {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {color.map((c) => {
-          return (
-            <DraggableColorBox
-              key={c.color}
-              color={c.color}
-              name={c.name}
-              handleClick={() => handleDelete(c.color)}
-            />
-          );
-        })}
+        <DraggableColorList
+          color={color}
+          handleDelete={handleDelete}
+          axis="xy"
+          onSortEnd={onSortEnd}
+        />
       </Main>
     </Box>
   );
