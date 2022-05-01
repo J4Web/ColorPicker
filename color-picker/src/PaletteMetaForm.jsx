@@ -29,10 +29,8 @@ const styles = {
 function PaletteMetaForm(props) {
   const [open, setOpen] = React.useState(props.isOpen);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const { color, palette, namePalette, setPaletteName, classes } = props;
+  const { color, palette, namePalette, setPaletteName, classes, handleClose } =
+    props;
 
   const formik1 = useFormik({
     initialValues: {

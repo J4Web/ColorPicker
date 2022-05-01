@@ -59,6 +59,9 @@ const PaletteFormNav = (props) => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -104,6 +107,7 @@ const PaletteFormNav = (props) => {
           setPaletteName={setPaletteName}
           savePalette={savePalette}
           isOpen={isOpen}
+          handleClose={handleClose}
         />
       )}
     </div>
