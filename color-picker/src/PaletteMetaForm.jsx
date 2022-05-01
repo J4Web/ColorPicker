@@ -11,7 +11,21 @@ import * as yup from "yup";
 import { withStyles } from "@material-ui/core/styles";
 import { WithRoutes } from "./WithRoutes";
 
-const styles = {};
+const styles = {
+  input: {
+    width: "100%",
+    border: "none",
+    outline: "none",
+    borderBottom: "1px solid #ccc",
+    padding: "7px",
+    fontSize: "1.4rem",
+  },
+  error: {
+    display: "flex",
+    color: "#ed4337",
+    marginBottom: "2.8px",
+  },
+};
 function PaletteMetaForm(props) {
   const [open, setOpen] = React.useState(false);
 
@@ -69,14 +83,16 @@ function PaletteMetaForm(props) {
         Open form dialog
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
-          <form onSubmit={formik1.handleSubmit}>
+        <DialogTitle>Choose a Palette Name</DialogTitle>
+        <form onSubmit={formik1.handleSubmit}>
+          <DialogContent>
+            <DialogContentText>
+              Please select a name for your beautiful palette. Must be sure it's
+              unique!
+            </DialogContentText>
+
             <input
+              className={classes.input}
               type="text"
               id="namePalette"
               name="namePalette"
@@ -84,19 +100,18 @@ function PaletteMetaForm(props) {
               onChange={formik1.handleChange}
             />
             {formik1.errors.namePalette ? (
-              <span className={{ color: "red" }}>
+              <span className={classes.error}>
                 {formik1.errors.namePalette}
               </span>
             ) : null}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
             <Button type="submit" variant="contained" color="primary">
               Save Palette
             </Button>
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
-        </DialogActions>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );

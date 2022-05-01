@@ -9,7 +9,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { WithRoutes } from "./WithRoutes";
-import { useFormik } from "formik";
 import { withStyles } from "@material-ui/core/styles";
 import PaletteMetaForm from "./PaletteMetaForm";
 import * as yup from "yup";
