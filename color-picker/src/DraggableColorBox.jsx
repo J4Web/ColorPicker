@@ -38,21 +38,27 @@ const styles = {
     transition: "all 0.3 ease-in-out",
   },
 };
-const DraggableColorBox = SortableElement((props) => {
+const DraggableColorBox = (props) => {
   const bgColor = props.color;
-  const { handleClick } = props;
+  // console.error(bgColor);
+  const { handleDelete } = props;
   const { classes } = props;
   // console.log(props);
   // console.log(props.classes);
+
   return (
     <div className={classes.root} style={{ background: bgColor }}>
       <div className={classes.boxContent}>
         <span>{props.name}</span>
 
-        <DeleteIcon className={classes.deleteIcon} onClick={handleClick} />
+        <DeleteIcon
+          className={classes.deleteIcon}
+          onClick={() => handleDelete(bgColor)}
+        />
       </div>
     </div>
   );
-});
+};
 
-export default withStyles(styles)(DraggableColorBox);
+export default SortableElement(withStyles(styles)(DraggableColorBox));
+//  SortableElement()

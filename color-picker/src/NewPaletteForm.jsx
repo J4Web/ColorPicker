@@ -67,12 +67,15 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 function NewPaletteForm(props) {
+  const initialPalette = props.palette[0].colors;
+  console.log(initialPalette);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [currColor, setColor] = React.useState("teal");
-  const [color, setmoreColor] = React.useState([]);
+  const [color, setmoreColor] = React.useState(initialPalette);
   const [namePalette, setPaletteName] = React.useState("");
   const { palette } = props;
+  const maxColor = 20;
 
   const formik = useFormik({
     initialValues: {
@@ -152,7 +155,7 @@ function NewPaletteForm(props) {
   });
   console.warn(formik.errors);
   console.warn(formik1.errors);
-  console.log(color);
+  // console.log(color);
 
   // const colorSchema = yup.object({
   //   color: string()
@@ -180,11 +183,21 @@ function NewPaletteForm(props) {
     setColor(newColor.hex);
   };
   const handleDelete = (colorHex) => {
+    console.log("success in running");
     setmoreColor(color.filter((p) => p.color !== colorHex));
-    console.log(color);
+    // console.log(color);
   };
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setmoreColor(arrayMove(color, oldIndex, newIndex));
+  };
+  const handleClearPalette = () => {
+    setmoreColor([]);
+  };
+  const addRandomColor = () => {
+    const allColor = props.palette.map((p) => p.colors).flat();
+    let rand = Math.floor(Math.random() * allColor.length);
+    const randomColor = allColor[rand];
+    setmoreColor([...color, randomColor]);
   };
   // const newColor = async (evt, newColor) => {
   //   evt.preventDefault();
@@ -220,6 +233,7 @@ function NewPaletteForm(props) {
   //   props.nav("/");
   // };
   // console.log(formik.values);
+  const shouldDisable = color.length >= maxColor;
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -277,10 +291,19 @@ function NewPaletteForm(props) {
         <Divider />
         <Typography variant="h4">Design Your Palette</Typography>
         <div>
-          <Button variant="contained" color="secondary">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleClearPalette}
+          >
             Clear Palette
           </Button>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={addRandomColor}
+            disabled={shouldDisable}
+          >
             Random Color
           </Button>
         </div>
@@ -300,7 +323,7 @@ function NewPaletteForm(props) {
             color="primary"
             type="submit"
             style={{ background: `${currColor}` }}
-            // onClick={newColor}
+            disabled={shouldDisable}
           >
             Add Color
           </Button>
