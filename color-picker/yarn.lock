@@ -1126,6 +1126,11 @@
   dependencies:
     postcss-value-parser "^4.2.0"
 
+"@emoji-mart/data@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@emoji-mart/data/-/data-1.0.1.tgz#76ca80a7b6d02706ec329116d6e4518bb3453ad2"
+  integrity sha512-5X6DbIdyFvSFMfGdPkPd/yxQmtfMptZg5UUSL+afb39SdbPvobJY7VhzGM0IekxjszW3ygxZ2X5mVhy5AqF5vQ==
+
 "@emotion/babel-plugin@^11.7.1":
   version "11.9.2"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.9.2.tgz#723b6d394c89fb2ef782229d92ba95a740576e95"
@@ -3966,6 +3971,11 @@ emittery@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/emittery/-/emittery-0.8.1.tgz#bb23cc86d03b30aa75a7f734819dee2e1ba70860"
   integrity sha512-uDfvUjVrfGJJhymx/kz6prltenw1u7WrCg1oa94zYY8xxVpLLUu045LAT0dhDZdXG58/EpPL/5kA180fQ/qudg==
+
+emoji-mart@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/emoji-mart/-/emoji-mart-5.0.0.tgz#1c16bf4e675c59c08a73b11e385cf1cc4d425b27"
+  integrity sha512-4O75LxV/RPOrtC9+0qhHhfPgJgW/Kwc4zv15h190liC3vJ/5RVibIrnPlDZ0xqYx0bPVOy3W/QcDTZY+jq1qOw==
 
 emoji-regex@^8.0.0:
   version "8.0.0"

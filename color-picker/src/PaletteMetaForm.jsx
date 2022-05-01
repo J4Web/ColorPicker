@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -10,6 +10,18 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { withStyles } from "@material-ui/core/styles";
 import { WithRoutes } from "./WithRoutes";
+
+import { Picker } from "emoji-mart";
+import data from "@emoji-mart/data";
+function EmojiPicker(props) {
+  const ref = useRef();
+
+  useEffect(() => {
+    new Picker({ ...props, data, ref });
+  }, []);
+
+  return <div ref={ref} />;
+}
 
 const styles = {
   input: {
@@ -28,9 +40,11 @@ const styles = {
 };
 function PaletteMetaForm(props) {
   const [open, setOpen] = React.useState(props.isOpen);
+  const [openEmoji, setEmoji] = React.useState(false);
 
   const { color, palette, namePalette, setPaletteName, classes, handleClose } =
     props;
+  let emojiUse = "";
 
   const formik1 = useFormik({
     initialValues: {
@@ -61,6 +75,7 @@ function PaletteMetaForm(props) {
         paletteName: newName,
         id: newName.toLowerCase().replace(/ /g, "-"),
         colors: color,
+        emoji: emojiUse,
       };
       console.error(newPalette);
       if (newPalette.colors.length !== 0) {
@@ -70,12 +85,28 @@ function PaletteMetaForm(props) {
     },
   });
   console.warn(formik1.errors);
+  const handleNextStep = () => {
+    setOpen(false);
+    setEmoji(true);
+  };
+  const handleSelectEmoji = (emoji) => {
+    emojiUse = emoji.native;
+    console.log(emoji.native);
+    formik1.handleSubmit();
+  };
+  const closeEmoji = () => {
+    setEmoji(false);
+  };
 
   return (
     <div>
+      <Dialog open={openEmoji} onClose={closeEmoji}>
+        <DialogTitle>Pick a Palette Emoji...</DialogTitle>
+        <EmojiPicker onEmojiSelect={handleSelectEmoji} />
+      </Dialog>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Choose a Palette Name</DialogTitle>
-        <form onSubmit={formik1.handleSubmit}>
+        <form>
           <DialogContent>
             <DialogContentText>
               Please select a name for your beautiful palette. Must be sure it's
@@ -98,8 +129,12 @@ function PaletteMetaForm(props) {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button type="submit" variant="contained" color="primary">
-              Save Palette
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNextStep}
+            >
+              Save
             </Button>
           </DialogActions>
         </form>
