@@ -18,12 +18,13 @@ import ColorPickerForm from "./ColorPickerForm";
 const drawerWidth = 400;
 const styles = {
   container: {
-    width: "100%",
+    width: "90%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
+    marginLeft: "5%",
   },
 };
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -60,7 +61,7 @@ function NewPaletteForm(props) {
   console.log(initialPalette);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [currColor, setColor] = React.useState("teal");
+  const [currColor, setColor] = React.useState("#e56d");
   const [color, setmoreColor] = React.useState(initialPalette);
   const [namePalette, setPaletteName] = React.useState("");
 

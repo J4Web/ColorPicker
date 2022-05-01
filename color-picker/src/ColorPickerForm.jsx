@@ -14,7 +14,6 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = {
   picker: {
     width: "100% !important",
-    paddingBottom: "10px",
     marginTop: "2rem",
   },
 

@@ -11,10 +11,8 @@ import { Link } from "react-router-dom";
 import { WithRoutes } from "./WithRoutes";
 import { useFormik } from "formik";
 import { withStyles } from "@material-ui/core/styles";
+import PaletteMetaForm from "./PaletteMetaForm";
 import * as yup from "yup";
-const styles = {
-  navBtns: {},
-};
 const drawerWidth = 400;
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -35,6 +33,7 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
+const styles = {};
 
 const PaletteFormNav = (props) => {
   const {
@@ -44,46 +43,9 @@ const PaletteFormNav = (props) => {
     palette,
     namePalette,
     setPaletteName,
+    savePalette,
   } = props;
 
-  const formik1 = useFormik({
-    initialValues: {
-      namePalette: "",
-    },
-    validationSchema: yup.object({
-      namePalette: yup
-        .string()
-        .required("Required")
-        .test(
-          "isPaletteNameUnique",
-          "Palette Name Already made!",
-          function validateName(namePalette) {
-            console.log(namePalette);
-            console.log(palette);
-            let isValid = palette.every(
-              ({ paletteName }) => paletteName !== namePalette
-            );
-            return isValid;
-          }
-        ),
-    }),
-    onSubmit: (values) => {
-      let newName = values.namePalette;
-      console.log(newName);
-      setPaletteName(values.namePalette);
-      const newPalette = {
-        paletteName: newName,
-        id: newName.toLowerCase().replace(/ /g, "-"),
-        colors: color,
-      };
-      console.error(newPalette);
-      if (newPalette.colors.length !== 0) {
-        props.savePalette(newPalette);
-        props.nav("/");
-      }
-    },
-  });
-  console.warn(formik1.errors);
   const { classes } = props;
   return (
     <div className={classes.root}>
@@ -104,23 +66,12 @@ const PaletteFormNav = (props) => {
           </Typography>
         </Toolbar>
         <div className={classes.navBtns}>
-          <form onSubmit={formik1.handleSubmit}>
-            <input
-              type="text"
-              id="namePalette"
-              name="namePalette"
-              value={formik1.values.namePalette}
-              onChange={formik1.handleChange}
-            />
-            {formik1.errors.namePalette ? (
-              <span className={{ color: "red" }}>
-                {formik1.errors.namePalette}
-              </span>
-            ) : null}
-            <Button type="submit" variant="contained" color="primary">
-              Save Palette
-            </Button>
-          </form>
+          <PaletteMetaForm
+            color={color}
+            palette={palette}
+            setPaletteName={setPaletteName}
+            savePalette={savePalette}
+          />
           <Link to="/">
             <Button type="submit " variant="contained" color="secondary">
               Go Back
