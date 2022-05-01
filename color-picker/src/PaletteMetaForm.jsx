@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -10,7 +9,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { withStyles } from "@material-ui/core/styles";
 import { WithRoutes } from "./WithRoutes";
-
+import { styles } from "./styles/PaletteMetaFormStyles";
 import { Picker } from "emoji-mart";
 import data from "@emoji-mart/data";
 function EmojiPicker(props) {
@@ -22,22 +21,6 @@ function EmojiPicker(props) {
 
   return <div ref={ref} />;
 }
-
-const styles = {
-  input: {
-    width: "100%",
-    border: "none",
-    outline: "none",
-    borderBottom: "1px solid #ccc",
-    padding: "7px",
-    fontSize: "1.4rem",
-  },
-  error: {
-    display: "flex",
-    color: "#ed4337",
-    marginBottom: "2.8px",
-  },
-};
 function PaletteMetaForm(props) {
   const [open, setOpen] = React.useState(props.isOpen);
   const [openEmoji, setEmoji] = React.useState(false);
@@ -101,7 +84,7 @@ function PaletteMetaForm(props) {
   return (
     <div>
       <Dialog open={openEmoji} onClose={closeEmoji}>
-        <DialogTitle>Pick a Palette Emoji...</DialogTitle>
+        <DialogTitle>Pick a Palette Emoji</DialogTitle>
         <EmojiPicker onEmojiSelect={handleSelectEmoji} />
       </Dialog>
       <Dialog open={open} onClose={handleClose}>
