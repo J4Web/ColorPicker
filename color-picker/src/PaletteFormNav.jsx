@@ -22,7 +22,9 @@ const AppBar = styled(MuiAppBar, {
   }),
   flexDirection: "row",
   justifyContent: "space-between",
+  alignItems: "center",
   height: "64px",
+
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: `${drawerWidth}px`,
@@ -32,7 +34,14 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
-const styles = {};
+const styles = {
+  navBtns: {
+    marginRight: "1rem!important",
+  },
+  btn: {
+    margin: "0 0.4rem!important",
+  },
+};
 
 const PaletteFormNav = (props) => {
   const {
@@ -45,7 +54,11 @@ const PaletteFormNav = (props) => {
     savePalette,
   } = props;
 
+  const [isOpen, setOpen] = React.useState(false);
   const { classes } = props;
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -65,19 +78,34 @@ const PaletteFormNav = (props) => {
           </Typography>
         </Toolbar>
         <div className={classes.navBtns}>
-          <PaletteMetaForm
-            color={color}
-            palette={palette}
-            setPaletteName={setPaletteName}
-            savePalette={savePalette}
-          />
           <Link to="/">
-            <Button type="submit " variant="contained" color="secondary">
+            <Button
+              type="submit "
+              variant="contained"
+              color="secondary"
+              className={classes.btn}
+            >
               Go Back
             </Button>
           </Link>
+          <Button
+            className={classes.btn}
+            variant="contained"
+            onClick={handleClickOpen}
+          >
+            Save Palette
+          </Button>
         </div>
       </AppBar>
+      {isOpen && (
+        <PaletteMetaForm
+          color={color}
+          palette={palette}
+          setPaletteName={setPaletteName}
+          savePalette={savePalette}
+          isOpen={isOpen}
+        />
+      )}
     </div>
   );
 };

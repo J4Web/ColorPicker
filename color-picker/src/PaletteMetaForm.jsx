@@ -27,11 +27,7 @@ const styles = {
   },
 };
 function PaletteMetaForm(props) {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const [open, setOpen] = React.useState(props.isOpen);
 
   const handleClose = () => {
     setOpen(false);
@@ -79,9 +75,6 @@ function PaletteMetaForm(props) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
-      </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Choose a Palette Name</DialogTitle>
         <form onSubmit={formik1.handleSubmit}>
