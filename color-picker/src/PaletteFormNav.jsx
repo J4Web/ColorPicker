@@ -10,8 +10,14 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { WithRoutes } from "./WithRoutes";
 import { useFormik } from "formik";
+import { withStyles } from "@material-ui/core/styles";
 import * as yup from "yup";
-
+const styles = {
+  root: {
+    display: "flex",
+  },
+  navBtns: {},
+};
 const drawerWidth = 400;
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -20,6 +26,9 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+  flexDirection: "row",
+  justifyContent: "space-between",
+  height: "64px",
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: `${drawerWidth}px`,
@@ -31,8 +40,14 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const PaletteFormNav = (props) => {
-  const { classes, open, handleDrawerOpen, color, palette } = props;
-  const [namePalette, setPaletteName] = React.useState("");
+  const {
+    open,
+    handleDrawerOpen,
+    color,
+    palette,
+    namePalette,
+    setPaletteName,
+  } = props;
 
   const formik1 = useFormik({
     initialValues: {
@@ -72,9 +87,9 @@ const PaletteFormNav = (props) => {
     },
   });
   console.warn(formik1.errors);
-
+  const { classes } = props;
   return (
-    <div>
+    <div className={classes.root}>
       <CssBaseline />
       <AppBar color="default" position="fixed" open={open}>
         <Toolbar>
@@ -88,8 +103,10 @@ const PaletteFormNav = (props) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Persistent drawer
+            Create A Palette
           </Typography>
+        </Toolbar>
+        <div className={classes.navBtns}>
           <form onSubmit={formik1.handleSubmit}>
             <input
               type="text"
@@ -106,16 +123,16 @@ const PaletteFormNav = (props) => {
             <Button type="submit" variant="contained" color="primary">
               Save Palette
             </Button>
-            <Link to="/">
-              <Button type="submit " variant="contained" color="secondary">
-                Go Back
-              </Button>
-            </Link>
           </form>
-        </Toolbar>
+          <Link to="/">
+            <Button type="submit " variant="contained" color="secondary">
+              Go Back
+            </Button>
+          </Link>
+        </div>
       </AppBar>
     </div>
   );
 };
 
-export default WithRoutes(PaletteFormNav);
+export default withStyles(styles)(WithRoutes(PaletteFormNav));
