@@ -12,9 +12,20 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import DraggableColorList from "./DraggableColorList";
 import PaletteFormNav from "./PaletteFormNav";
+import { withStyles } from "@material-ui/core/styles";
 import { arrayMove } from "react-sortable-hoc";
+import ColorPickerForm from "./ColorPickerForm";
 const drawerWidth = 400;
-
+const styles = {
+  container: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
+};
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
@@ -53,49 +64,8 @@ function NewPaletteForm(props) {
   const [color, setmoreColor] = React.useState(initialPalette);
   const [namePalette, setPaletteName] = React.useState("");
 
-  const { palette } = props;
+  const { palette, classes } = props;
   const maxColor = 20;
-
-  const formik = useFormik({
-    initialValues: {
-      newName: "",
-    },
-    validationSchema: yup.object().shape({
-      newName: yup
-        .string()
-        .required("Required")
-        .test(
-          "isNameUnique",
-          "Name must be unique",
-          function validateColor(val) {
-            try {
-              const isValid = color.every(
-                (p) =>
-                  p.name.toLowerCase() !== val.toLowerCase() &&
-                  color.length !== 0
-              );
-              console.log("promiseeee", isValid);
-              console.log("val", val);
-              console.log("currColor", currColor);
-              return isValid;
-            } catch (err) {
-              console.log(err);
-            }
-          }
-        ),
-    }),
-    onSubmit: (values) => {
-      console.error(values);
-      // evt.preventDefault();
-      const idkColor = {
-        color: currColor,
-        name: values.newName,
-      };
-      console.log("obj colorr", idkColor);
-      console.log(color);
-      setmoreColor([...color, idkColor]);
-    },
-  });
 
   // console.log(color);
 
@@ -191,6 +161,8 @@ function NewPaletteForm(props) {
       <Drawer
         sx={{
           width: drawerWidth,
+          display: "flex",
+          alignItems: "center",
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
@@ -207,46 +179,20 @@ function NewPaletteForm(props) {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <Typography variant="h4">Design Your Palette</Typography>
-        <div>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={handleClearPalette}
-          >
-            Clear Palette
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={addRandomColor}
-            disabled={shouldDisable}
-          >
-            Random Color
-          </Button>
-        </div>
-
-        <ChromePicker color={currColor} onChangeComplete={updateColor} />
-        <form onSubmit={formik.handleSubmit}>
-          <input
-            type="text"
-            id="newName"
-            name="newName"
-            value={formik.values.newName}
-            onChange={formik.handleChange}
+        <div className={classes.container}>
+          <Typography variant="h4" gutterBottom>
+            Design Your Palette
+          </Typography>
+          <ColorPickerForm
+            color={color}
+            currColor={currColor}
+            setmoreColor={setmoreColor}
+            handleClearPalette={handleClearPalette}
+            addRandomColor={addRandomColor}
+            shouldDisable={shouldDisable}
+            updateColor={updateColor}
           />
-          {formik.errors.newName ? <span>{formik.errors.newName}</span> : null}
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            style={{ background: `${currColor}` }}
-            disabled={shouldDisable}
-          >
-            Add Color
-          </Button>
-        </form>
-
+        </div>
         {/* <Divider /> */}
       </Drawer>
       <Main open={open}>
@@ -262,4 +208,4 @@ function NewPaletteForm(props) {
   );
 }
 
-export default NewPaletteForm;
+export default withStyles(styles)(NewPaletteForm);

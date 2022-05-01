@@ -13,9 +13,6 @@ import { useFormik } from "formik";
 import { withStyles } from "@material-ui/core/styles";
 import * as yup from "yup";
 const styles = {
-  root: {
-    display: "flex",
-  },
   navBtns: {},
 };
 const drawerWidth = 400;
