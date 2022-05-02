@@ -2,6 +2,7 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles/MiniPalette.js";
 // so in short if you wanna target specific inside a class we do "& h3:{}"
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function MiniPalette(props) {
   const { classes, emoji, paletteName, colors } = props;
@@ -14,6 +15,12 @@ function MiniPalette(props) {
   ));
   return (
     <div className={classes.root} onClick={props.handlePath}>
+      <div
+        className={classes.delete}
+        style={{ transition: "all 3s easy-in-out" }}
+      >
+        <DeleteIcon className={classes.deleteIcon} />
+      </div>
       <div className={classes.colors}>{miniColorBoxes}</div>
       <h5 className={classes.title}>
         {paletteName} <span className={classes.emoji}>{emoji}</span>
