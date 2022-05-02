@@ -58,9 +58,14 @@ const styles = {
       width: "100%",
       height: "10%",
     },
+    [sizes.down("lg")]: {
+      width: "25%",
+      height: "33.3333%",
+    },
     [sizes.down("md")]: {
       width: "50%",
       height: "20%",
+      marginBottom: "-4px",
     },
   },
   // backBtn: {

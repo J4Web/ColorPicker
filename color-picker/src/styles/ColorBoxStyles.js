@@ -1,5 +1,6 @@
 import chroma from "chroma-js";
 import sizes from "./sizes";
+import injectSheet from "react-jss";
 const styles = {
   colorBox: {
     width: "20%",
@@ -94,30 +95,6 @@ const styles = {
     transform: "scale(50)",
     zIndex: "10",
     position: "absolute",
-  },
-  copyMsg: {
-    position: "fixed",
-    left: "0",
-    right: "0",
-    bottom: "0",
-    top: "0",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-    /* align-self: center; */
-    fontSize: "3em",
-    paddingBottom: "-30px",
-    transform: "scale(0.1)",
-    opacity: "0",
-    color: "#fff",
-  },
-  showMsg: {
-    opacity: "1",
-    transform: "scale(1)",
-    zIndex: "25",
-    transform: "all 0.5 ease-in-out",
-    transitionDelay: "0.2s",
   },
 };
 export default styles;
