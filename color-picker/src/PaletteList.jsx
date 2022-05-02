@@ -35,6 +35,7 @@ class PaletteList extends Component {
                   handlePath={() => this.handleClick(item.id)}
                   key={item.id}
                   id={item.id}
+                  palette={this.props.palette}
                 />
               );
             })}

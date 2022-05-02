@@ -14,7 +14,7 @@ import ColorPickerForm from "./ColorPickerForm";
 import { DrawerHeader, Main, styles } from "./styles/NewPaletteFormStyles";
 const drawerWidth = 400;
 function NewPaletteForm(props) {
-  const initialPalette = props.palette[0].colors;
+  const initialPalette = props.palette[0]?.colors;
   console.log(initialPalette);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
