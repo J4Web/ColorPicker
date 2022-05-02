@@ -13,18 +13,24 @@ function App() {
     // console.log(newPalette);
     setPalette([...palette, newPalette]);
   };
+  const delPalette = (id) => {
+    setPalette(palette.filter((palette) => palette.id !== id));
+  };
+
   useEffect(() => {
     console.log(palette, "suxhsdxnjnsjdcnjn");
     window.localStorage.setItem("palettes", JSON.stringify(palette));
   }, [palette]);
-
   return (
     <Routes>
       <Route
         path="/palette/new"
         element={<NewPaletteForm savePalette={savePalette} palette={palette} />}
       ></Route>
-      <Route path="/" element={<PaletteList palette={palette} />}></Route>
+      <Route
+        path="/"
+        element={<PaletteList palette={palette} delPalette={delPalette} />}
+      ></Route>
       <Route path="/palette/:id" element={<Combine palette={palette} />} />
       <Route
         path="/palette/:paletteId/:colorId"

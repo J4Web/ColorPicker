@@ -30,8 +30,11 @@ class PaletteList extends Component {
             {this.props.palette?.map((item) => {
               return (
                 <MiniPalette
+                  delPalette={this.props.delPalette}
                   {...item}
                   handlePath={() => this.handleClick(item.id)}
+                  key={item.id}
+                  id={item.id}
                 />
               );
             })}
