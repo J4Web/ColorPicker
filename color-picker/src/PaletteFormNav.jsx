@@ -67,7 +67,7 @@ const PaletteFormNav = (props) => {
             variant="contained"
             onClick={handleClickOpen}
           >
-            Save Palette
+            Save
           </Button>
         </div>
       </AppBar>

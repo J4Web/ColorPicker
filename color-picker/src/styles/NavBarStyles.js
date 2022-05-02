@@ -1,3 +1,4 @@
+import sizes from "./sizes";
 const styles = {
   navbar: {
     display: "flex",
@@ -17,6 +18,9 @@ const styles = {
     "& a": {
       textDecoration: "none",
       color: "#000",
+    },
+    [sizes.down("xs")]: {
+      display: "none",
     },
   },
   slider: {
@@ -40,6 +44,9 @@ const styles = {
         marginLeft: -"7px",
         marginTop: -"3px",
       },
+    [sizes.down("md")]: {
+      width: "155px",
+    },
   },
   selectContainer: {
     margin: "auto",
