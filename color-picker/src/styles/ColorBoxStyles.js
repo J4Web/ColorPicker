@@ -8,18 +8,18 @@ const styles = {
     display: "inline-block",
     position: "relative",
     cursor: "pointer",
-    marginBottom: "-4px",
+    marginBottom: "-4.5px",
     "&:hover button": {
       opacity: 1,
       transition: "0.5s",
     },
     [sizes.down("lg")]: {
       width: "25%",
-      height: (props) => (props.showingFullPalette ? "20%" : "50%"),
+      height: (props) => (props.showingFullPalette ? "20%" : "33.333333%"),
     },
     [sizes.down("md")]: {
       width: "50%",
-      height: (props) => (props.showingFullPalette ? "10%" : "50%"),
+      height: (props) => (props.showingFullPalette ? "10%" : "20%"),
     },
     [sizes.down("xs")]: {
       width: "100%",

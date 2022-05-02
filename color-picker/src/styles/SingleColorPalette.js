@@ -1,3 +1,4 @@
+import sizes from "./sizes";
 const styles = {
   singleColorPalette: {
     height: "50%",
@@ -52,6 +53,14 @@ const styles = {
       textTransform: "uppercase",
       border: "none",
       textDecoration: "none",
+    },
+    [sizes.down("xs")]: {
+      width: "100%",
+      height: "10%",
+    },
+    [sizes.down("md")]: {
+      width: "50%",
+      height: "20%",
     },
   },
   // backBtn: {
