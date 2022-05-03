@@ -54,10 +54,7 @@ const styles = {
       border: "none",
       textDecoration: "none",
     },
-    [sizes.down("xs")]: {
-      width: "100%",
-      height: "10%",
-    },
+
     [sizes.down("lg")]: {
       width: "25%",
       height: "33.3333%",
@@ -66,6 +63,11 @@ const styles = {
       width: "50%",
       height: "20%",
       marginBottom: "-4px",
+    },
+    [sizes.down("xs")]: {
+      width: "100%",
+      height: "10%",
+      marginLeft: "-500px",
     },
   },
   // backBtn: {

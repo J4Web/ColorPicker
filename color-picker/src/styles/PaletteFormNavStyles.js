@@ -12,8 +12,12 @@ const styles = {
 
   btn: {
     margin: "0 0.4rem!important",
-    [sizes.down("xs")]: {
+    [sizes.down("xm")]: {
       margin: "0.07 0.1rem !important",
+      padding: "2px!important",
+    },
+    [sizes.down("xs")]: {
+      margin: "0 !important",
       padding: "2px!important",
     },
   },
