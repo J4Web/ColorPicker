@@ -53,7 +53,7 @@ class PaletteList extends Component {
 
     // console.log(this.props);
     return (
-      <div className={classes.root}>
+      <div className={classes.root} onClick={this.closeDialog}>
         <div className={classes.container}>
           <nav className={classes.nav}>
             <h1 className={classes.heading}>React Colors</h1>
