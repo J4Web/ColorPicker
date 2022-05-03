@@ -1,4 +1,5 @@
 import sizes from "./sizes";
+import bg from "./bg.svg";
 const styles = {
   root: {
     backgroundColor: "teal",
@@ -6,6 +7,8 @@ const styles = {
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
+    backgroundImage: `url(${bg})`,
+    overflow: "scroll",
   },
   container: {
     width: "50%",
@@ -20,6 +23,11 @@ const styles = {
       width: "75%",
     },
   },
+  heading: {
+    fontSize: "1.8rem",
+    // boxShadow: "19px 0px 68px rgba(0, 0, 0, 0.13)",
+    paddingBottom: "5px",
+  },
   nav: {
     display: "flex",
     width: "100%",
@@ -31,6 +39,7 @@ const styles = {
       color: "white",
     },
   },
+
   palettes: {
     boxSizing: "border-box",
     width: "100%",
@@ -42,7 +51,7 @@ const styles = {
     },
     [sizes.down("xs")]: {
       gridTemplateColumns: "repeat(1,100%)",
-      gridGap: "1rem",
+      gridGap: "1.4rem",
     },
   },
 };
