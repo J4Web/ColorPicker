@@ -34,9 +34,10 @@ const styles = {
   },
   heading: {
     fontSize: "1.8rem",
-    // boxShadow: "19px 0px 68px rgba(0, 0, 0, 0.13)",
+    boxShadow: "19px 0px 68px rgba(0, 0, 0, 0)",
     paddingBottom: "5px",
   },
+
   nav: {
     display: "flex",
     width: "100%",
