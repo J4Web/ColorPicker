@@ -43,6 +43,11 @@ function AnimatedRoutes() {
           path="/palette/:paletteId/:colorId"
           element={<SingleColorPalette palette={palette} />}
         />
+        <Route
+          path="*"
+          element={<PaletteList palette={palette} delPalette={delPalette} />}
+        />
+        } />
       </Routes>
     </AnimatePresence>
   );
