@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link } from "react-router-dom";
 import MiniPalette from "./MiniPalette";
 import { withStyles } from "@material-ui/core/styles";
@@ -18,9 +18,10 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import { blue } from "@mui/material/colors";
 import { red } from "@mui/material/colors";
+import { motion } from "framer-motion";
 
 import styles from "./styles/PaletteList.js";
-class PaletteList extends Component {
+class PaletteList extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,7 +54,13 @@ class PaletteList extends Component {
 
     // console.log(this.props);
     return (
-      <div className={classes.root} onClick={this.closeDialog}>
+      <motion.div
+        className={classes.root}
+        onClick={this.closeDialog}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ x: window.innerWidth, transition: { duration: 0.24 } }}
+      >
         <div className={classes.container}>
           <nav className={classes.nav}>
             <h1 className={classes.heading}>React Colors</h1>
@@ -70,7 +77,7 @@ class PaletteList extends Component {
                   <MiniPalette
                     delPalette={this.props.delPalette}
                     {...item}
-                    handlePath={() => this.handleClick(item.id)}
+                    handlePath={this.handleClick}
                     openDialog={this.openDialog}
                     key={item.id}
                     id={item.id}
@@ -109,7 +116,7 @@ class PaletteList extends Component {
             </ListItem>
           </List>
         </Dialog>
-      </div>
+      </motion.div>
     );
   }
 }

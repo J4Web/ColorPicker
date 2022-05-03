@@ -11,6 +11,7 @@ import PaletteFooter from "./PaletteFooter";
 import { withStyles } from "@material-ui/core/styles";
 // import "./FooterForSingleColor.css";
 import styles from "./styles/SingleColorPalette.js";
+import { motion } from "framer-motion";
 class SingleColorPalette extends Component {
   constructor(props) {
     super(props);
@@ -84,7 +85,12 @@ class SingleColorPalette extends Component {
     // console.log(colorId);
     // console.log(palette);
     return (
-      <div className={`${classes.singleColorPalette} ${classes.palette}`}>
+      <motion.div
+        className={`${classes.singleColorPalette} ${classes.palette}`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ x: window.innerWidth, transition: { duration: 0.3 } }}
+      >
         <Navbar formatChange={this.formatChange} isShowingAllColors={false} />
         {/* <h1>Single Color Palette</h1> */}
         <div className={classes.paletteColors}>
@@ -101,7 +107,7 @@ class SingleColorPalette extends Component {
         </div>
 
         <PaletteFooter emoji={emoji} paletteName={paletteName} />
-      </div>
+      </motion.div>
     );
   }
 }

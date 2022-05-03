@@ -13,6 +13,7 @@ import { withStyles } from "@material-ui/core/styles";
 import PaletteMetaForm from "./PaletteMetaForm";
 import { AppBar } from "./styles/PaletteFormNavStyles";
 import { styles } from "./styles/PaletteFormNavStyles";
+import { motion } from "framer-motion";
 
 const PaletteFormNav = (props) => {
   const {
@@ -34,7 +35,12 @@ const PaletteFormNav = (props) => {
     setOpen(false);
   };
   return (
-    <div className={classes.root}>
+    <motion.div
+      className={classes.root}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.24 } }}
+    >
       <CssBaseline />
       <AppBar color="default" position="fixed" open={open}>
         <Toolbar>
@@ -81,7 +87,7 @@ const PaletteFormNav = (props) => {
           handleClose={handleClose}
         />
       )}
-    </div>
+    </motion.div>
   );
 };
 
