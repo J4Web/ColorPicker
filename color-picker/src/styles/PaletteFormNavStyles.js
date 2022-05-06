@@ -21,6 +21,9 @@ const styles = {
       padding: "2px!important",
     },
   },
+  pickerHeading: {
+    fontSize: "20px!important",
+  },
 };
 
 const AppBar = styled(MuiAppBar, {

@@ -6,9 +6,6 @@ import { WithRoutes } from "./WithRoutes";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Dialog from "@mui/material/Dialog";
 import Avatar from "@mui/material/Avatar";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -19,6 +16,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { blue } from "@mui/material/colors";
 import { red } from "@mui/material/colors";
 import { motion } from "framer-motion";
+import { v4 as uuidv4 } from "uuid";
 
 import styles from "./styles/PaletteList.js";
 class PaletteList extends PureComponent {
@@ -59,27 +57,30 @@ class PaletteList extends PureComponent {
         onClick={this.closeDialog}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={{ x: window.innerWidth, transition: { duration: 0.24 } }}
+        exit={{ x: window.innerWidth, transition: { duration: 0.26 } }}
       >
         <div className={classes.container}>
           <nav className={classes.nav}>
             <h1 className={classes.heading}>React Colors</h1>
-            <Link to="/palette/new">Create New Palette</Link>
+            <Link className={classes.link} to="/palette/new">
+              Create A Palette
+            </Link>
           </nav>
 
           <TransitionGroup
             className={classes.palettes}
             onClose={this.closeDialog}
+            key={uuidv4()}
           >
             {this.props.palette?.map((item) => {
               return (
-                <CSSTransition key={item.id} classNames="fade" timeout={300}>
+                <CSSTransition key={uuidv4()} classNames="fade" timeout={300}>
                   <MiniPalette
                     delPalette={this.props.delPalette}
                     {...item}
                     handlePath={this.handleClick}
                     openDialog={this.openDialog}
-                    key={item.id}
+                    key={uuidv4()}
                     id={item.id}
                     palette={this.props.palette}
                   />

@@ -12,12 +12,13 @@ import { withStyles } from "@material-ui/core/styles";
 import { arrayMove } from "react-sortable-hoc";
 import ColorPickerForm from "./ColorPickerForm";
 import { DrawerHeader, Main, styles } from "./styles/NewPaletteFormStyles";
+import { motion } from "framer-motion";
 const drawerWidth = 400;
 function NewPaletteForm(props) {
   const initialPalette = props.palette[0]?.colors;
-  console.log(initialPalette);
+  // console.log(initialPalette);
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [currColor, setColor] = React.useState("#e56d");
   const [color, setmoreColor] = React.useState(initialPalette);
   const [namePalette, setPaletteName] = React.useState("");
@@ -53,7 +54,7 @@ function NewPaletteForm(props) {
     setColor(newColor.hex);
   };
   const handleDelete = (colorHex) => {
-    console.log("success in running");
+    // console.log("success in running");
     setmoreColor(color.filter((p) => p.color !== colorHex));
     // console.log(color);
   };
@@ -72,8 +73,8 @@ function NewPaletteForm(props) {
       rand = Math.floor(Math.random() * allColor.length);
       const randomColor = allColor[rand];
       isDuplicate = color.some((c) => c.name === randomColor.name);
-      console.log("isDuplicate", isDuplicate);
-      console.log("color itself", randomColor);
+      // console.log("isDuplicate", isDuplicate);
+      // console.log("color itself", randomColor);
       if (!isDuplicate) {
         setmoreColor([...color, randomColor]);
       }
@@ -116,64 +117,71 @@ function NewPaletteForm(props) {
 
   const shouldDisable = color.length >= maxColor;
   return (
-    <Box sx={{ display: "flex" }}>
-      <PaletteFormNav
-        handleDrawerOpen={handleDrawerOpen}
-        color={color}
-        palette={palette}
-        setmoreColor={setmoreColor}
-        savePalette={props.savePalette}
-        namePalette={namePalette}
-        setPaletteName={setPaletteName}
-      />
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          display: "flex",
-          alignItems: "center",
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" && <ChevronLeftIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <div className={classes.container}>
-          <Typography variant="h4" gutterBottom>
-            Design Your Palette
-          </Typography>
-          <ColorPickerForm
-            color={color}
-            currColor={currColor}
-            setmoreColor={setmoreColor}
-            handleClearPalette={handleClearPalette}
-            addRandomColor={addRandomColor}
-            shouldDisable={shouldDisable}
-            updateColor={updateColor}
-          />
-        </div>
-        {/* <Divider /> */}
-      </Drawer>
-      <Main open={open}>
-        <DrawerHeader />
-        <DraggableColorList
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ x: window.innerWidth, transition: { duration: 0.26 } }}
+    >
+      <Box sx={{ display: "flex" }}>
+        <PaletteFormNav
+          handleDrawerOpen={handleDrawerOpen}
           color={color}
-          handleDelete={handleDelete}
-          axis="xy"
-          onSortEnd={onSortEnd}
-          distance={20}
+          palette={palette}
+          setmoreColor={setmoreColor}
+          savePalette={props.savePalette}
+          namePalette={namePalette}
+          setPaletteName={setPaletteName}
         />
-      </Main>
-    </Box>
+        <Drawer
+          sx={{
+            width: drawerWidth,
+            display: "flex",
+            alignItems: "center",
+            height: "100vh",
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+            },
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}
+        >
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "ltr" && <ChevronLeftIcon />}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <div className={classes.container}>
+            <Typography variant="h4" gutterBottom>
+              Design Your Palette
+            </Typography>
+            <ColorPickerForm
+              color={color}
+              currColor={currColor}
+              setmoreColor={setmoreColor}
+              handleClearPalette={handleClearPalette}
+              addRandomColor={addRandomColor}
+              shouldDisable={shouldDisable}
+              updateColor={updateColor}
+            />
+          </div>
+          {/* <Divider /> */}
+        </Drawer>
+        <Main open={open}>
+          <DrawerHeader />
+          <DraggableColorList
+            color={color}
+            handleDelete={handleDelete}
+            axis="xy"
+            onSortEnd={onSortEnd}
+            distance={20}
+          />
+        </Main>
+      </Box>
+    </motion.div>
   );
 }
 

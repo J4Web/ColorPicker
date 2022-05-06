@@ -36,8 +36,14 @@ const styles = {
     fontSize: "1.8rem",
     boxShadow: "19px 0px 68px rgba(0, 0, 0, 0)",
     paddingBottom: "5px",
+    [sizes.down("xs")]: {
+      fontSize: "1.3rem",
+    },
   },
-
+  link: {
+    fontSize: "1.3rem",
+    fontWeight: "bold",
+  },
   nav: {
     display: "flex",
     width: "100%",

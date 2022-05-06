@@ -1,6 +1,7 @@
 import React from "react";
 import { SortableContainer } from "react-sortable-hoc";
 import DraggableColorBox from "./DraggableColorBox";
+import { v4 as uuidv4 } from "uuid";
 
 const DraggableColorList = ({ color, handleDelete }) => {
   return (
@@ -9,7 +10,7 @@ const DraggableColorList = ({ color, handleDelete }) => {
         return (
           <DraggableColorBox
             index={i}
-            key={c.color}
+            key={uuidv4()}
             color={c.color}
             name={c.name}
             handleDelete={handleDelete}

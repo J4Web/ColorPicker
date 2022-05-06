@@ -53,7 +53,12 @@ const PaletteFormNav = (props) => {
           >
             <AddToPhotosIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography
+            className={classes.pickerHeading}
+            variant="h6"
+            noWrap
+            component="div"
+          >
             Create A Palette
           </Typography>
         </Toolbar>

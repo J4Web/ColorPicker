@@ -24,8 +24,8 @@ const styles = {
     },
   },
   slider: {
-    width: "340px",
-    margin: "0 10px",
+    width: "320px",
+    margin: "0 17px",
     display: "inline-block",
     "& .rc-slider-rail": {
       height: "8px",
@@ -41,16 +41,41 @@ const styles = {
         boxShadow: "none",
         width: "13px",
         height: "13px",
-        marginLeft: -"7px",
+        marginLeft: "-7px",
         marginTop: -"3px",
       },
     [sizes.down("md")]: {
-      width: "155px",
+      width: "145px",
     },
   },
   selectContainer: {
     margin: "auto",
     marginRight: "1em",
+    [sizes.down("xs")]: {
+      fontSize: "5px",
+      marginRight: "0.1em",
+    },
+  },
+  navContent: {
+    margin: "5px",
+    [sizes.down("xs")]: {
+      fontSize: "1rem!important",
+      marginLeft: "5px",
+    },
+  },
+  snackbar: {
+    [sizes.down("xs")]: {
+      fontSize: "1rem!important",
+      textAlign: "center",
+    },
+  },
+  select: {
+    [sizes.down("xs")]: {
+      fontSize: "0.1rem!important",
+      border: "none!important",
+      outline: "none!important",
+      marginRight: "6rem!important",
+    },
   },
 };
 

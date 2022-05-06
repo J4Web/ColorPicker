@@ -6,11 +6,11 @@ const styles = {
     justifyContent: "flex-end",
     alignItems: "center",
     fontWeight: "bold",
-    marginBottom: "1.9em",
+    marginBottom: "1.9rem!important",
   },
   emoji: {
     fontSize: "1.5rem",
-    margin: "0 1.1rem",
+    margin: "0 2rem",
   },
 };
 

@@ -6,20 +6,7 @@ import { WithRoutes } from "./WithRoutes";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles/ColorBoxStyles.js";
-// const styles = {
-//   colorBox: {
-//     width: "20%",
-//     height: (props) => (props.showingFullPalette ? "25%" : "50%"),
-//     margin: "0 auto",
-//     display: "inline-block",
-//     position: "relative",
-//     cursor: "pointer",
-//     marginBottom: "-3.8px",
-//     "&:hover button": {
-//       opacity: 1,
-//       transition: "0.5s",
-//     },
-//   },
+
 //   boxContent: {
 //     position: "absolute",
 //     width: "100%",
@@ -140,7 +127,7 @@ class ColorBox extends Component {
     const color = this.props.bg[format];
     // const isDarkColor =
     const { classes } = this.props;
-    console.log(classes.copyText);
+    // console.log(classes.copyText);
     // console.log(isDarkColor);
     const { copied } = this.state;
     return (

@@ -66,7 +66,7 @@ class MiniPalette extends PureComponent {
     //  onst checkRerender=()=>{
 
     // }
-    console.log(id);
+    // console.log(id);
     return (
       <div className={classes.root} onClick={() => handlePath(id)}>
         {palette.length !== 1 && (

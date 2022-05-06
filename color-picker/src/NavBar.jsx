@@ -42,7 +42,7 @@ class NavBar extends Component {
         </div>
         {isShowingAllColors && (
           <div>
-            <span> Level: {level}</span>
+            <span className={classes.navContent}> Level: {level}</span>
             <div className={classes.slider}>
               <Slider
                 className="slider"
@@ -63,11 +63,12 @@ class NavBar extends Component {
           </Select>
         </div>
         <Snackbar
+          className={classes.snackbar}
           anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
           autoHideDuration={1000}
           open={this.state.open}
           message={
-            <p id="message-id">
+            <p id="message-id" class={classes.message}>
               Format Changed to {this.state.format.toUpperCase()}
             </p>
           }

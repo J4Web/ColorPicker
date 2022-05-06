@@ -1,6 +1,5 @@
 import chroma from "chroma-js";
 import sizes from "./sizes";
-import injectSheet from "react-jss";
 const styles = {
   colorBox: {
     width: "20%",
@@ -9,7 +8,7 @@ const styles = {
     display: "inline-block",
     position: "relative",
     cursor: "pointer",
-    marginBottom: "-4.5px",
+    marginBottom: "-5px!important",
     "&:hover button": {
       opacity: 1,
       transition: "0.5s",

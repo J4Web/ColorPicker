@@ -89,7 +89,7 @@ class SingleColorPalette extends Component {
         className={`${classes.singleColorPalette} ${classes.palette}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={{ x: window.innerWidth, transition: { duration: 0.3 } }}
+        exit={{ x: window.innerWidth, transition: { duration: 0.26 } }}
       >
         <Navbar formatChange={this.formatChange} isShowingAllColors={false} />
         {/* <h1>Single Color Palette</h1> */}

@@ -4,10 +4,11 @@ import Button from "@mui/material/Button";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { withStyles } from "@material-ui/core/styles";
+import sizes from "./styles/sizes";
 const styles = {
   picker: {
     width: "100% !important",
-    marginTop: "2rem",
+    marginTop: "1rem",
   },
 
   addColor: {
@@ -39,6 +40,13 @@ const styles = {
   btn: {
     width: "50%",
   },
+  root: {
+    [sizes.down("xs")]: {
+      width: "75%",
+      height: "100vh",
+      marginTop: "20%",
+    },
+  },
 };
 function ColorPickerForm(props) {
   const {
@@ -69,9 +77,9 @@ function ColorPickerForm(props) {
                   p.name.toLowerCase() !== val.toLowerCase() &&
                   color.length !== 0
               );
-              console.log("promiseeee", isValid);
-              console.log("val", val);
-              console.log("currColor", currColor);
+              // console.log("promiseeee", isValid);
+              // console.log("val", val);
+              // console.log("currColor", currColor);
               return isValid;
             } catch (err) {
               console.log(err);
@@ -86,8 +94,8 @@ function ColorPickerForm(props) {
         color: currColor,
         name: values.newName,
       };
-      console.log("obj colorr", idkColor);
-      console.log(color);
+      // console.log("obj colorr", idkColor);
+      // console.log(color);
       setmoreColor([...color, idkColor]);
     },
   });
@@ -120,7 +128,7 @@ function ColorPickerForm(props) {
       <form onSubmit={formik.handleSubmit}>
         <input
           className={classes.input}
-          autocomplete="off"
+          autoComplete="off"
           type="text"
           id="newName"
           placeholder="Color Name..."

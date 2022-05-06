@@ -5,6 +5,7 @@ import NavBar from "./NavBar";
 // import "./Palette.css";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles/Palette.js";
+import { v4 as uuidv4 } from "uuid";
 class Palette extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +45,7 @@ class Palette extends Component {
       // console.warn(box);
       return (
         <ColorBox
-          key={box[format]}
+          key={uuidv4()}
           bg={box}
           format={format}
           currentId={box.id}

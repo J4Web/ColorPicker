@@ -7,8 +7,9 @@ const styles = {
     margin: "0 auto",
     display: "inline-block",
     position: "relative",
+
     cursor: "pointer",
-    marginBottom: "-3.8px",
+    marginBottom: "-7px",
     "&:hover button": {
       opacity: 1,
       transition: "0.5s",
@@ -27,8 +28,8 @@ const styles = {
     },
     [sizes.down("sm")]: {
       width: "100%",
-      height: "5%",
-      marginBottom: "-6.8px",
+      height: "5.4%",
+      marginBottom: "-7px",
     },
   },
   boxContent: {
@@ -36,7 +37,7 @@ const styles = {
     width: "100%",
     left: "0px",
     bottom: "0px",
-    padding: "10px",
+    padding: "9px",
     color: (props) =>
       chroma(props.color).luminance() <= 0.08
         ? "rgba(255, 255, 255, 0.8)"

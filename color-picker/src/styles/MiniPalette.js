@@ -27,7 +27,7 @@ const styles = {
     position: "relative",
   },
   emoji: {
-    backgroundColor: "yellow",
+    boxshadow: "5px 10px #888888",
   },
   miniColor: {
     height: "25%",
